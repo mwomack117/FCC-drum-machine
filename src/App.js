@@ -14,13 +14,29 @@ class App extends Component {
     };
   }
 
+  displayName = (name) => {
+    this.setState({
+      display: name,
+    });
+
+    setTimeout(() => this.clearDisplay(), 200);
+  };
+
+  clearDisplay = () => {
+    this.setState({
+      display: String.fromCharCode(160),
+    });
+  };
+
   render() {
     return (
-      <div id="drum-machine" className="inner-container">
-        <div>
-          <audio src={this.state.currentPadBank[0].url} id="Q"></audio>
-        </div>
-        <DrumBank currentPadBank={this.state.currentPadBank} />
+      <div id="drum-machine">
+        <h1 id="title">Drum Machine</h1>
+        <DrumBank
+          currentPadBank={this.state.currentPadBank}
+          updateDisplay={this.displayName}
+        />
+        <h2 id="display">{this.state.display}</h2>
       </div>
     );
   }

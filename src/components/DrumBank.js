@@ -12,6 +12,7 @@ function DrumBank(props) {
             name={drumObj.id}
             url={drumObj.url}
             key={drumObj[i]}
+            updateDisplay={props.updateDisplay}
           />
         );
       })}

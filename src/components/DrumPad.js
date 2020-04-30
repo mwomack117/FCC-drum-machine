@@ -8,6 +8,19 @@ const inactiveStyle = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  transition: "all .15s",
+};
+
+const activeStyle = {
+  width: 90,
+  height: 90,
+  fontSize: 20,
+  backgroundColor: "orange",
+  margin: 5,
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  transform: "scale(1.1)",
 };
 
 class DrumPad extends Component {
@@ -32,10 +45,21 @@ class DrumPad extends Component {
     }
   };
 
+  handleStyleChange = () => {
+    this.state.padStyle.backgroundColor === "white"
+      ? this.setState({ padStyle: activeStyle })
+      : this.setState({ padStyle: inactiveStyle });
+  };
+
   playSound = (e) => {
     const sound = document.getElementById(this.props.keyTrigger);
     sound.currentTime = 0;
     sound.play();
+
+    this.handleStyleChange();
+    setTimeout(() => this.handleStyleChange(), 150);
+
+    this.props.updateDisplay(this.props.name);
   };
 
   render() {
@@ -46,7 +70,12 @@ class DrumPad extends Component {
         onClick={this.playSound}
         style={this.state.padStyle}
       >
-        <audio src={this.props.url} id={this.props.keyTrigger}></audio>
+        <audio
+          src={this.props.url}
+          id={this.props.keyTrigger}
+          className="clip"
+          type="audio/wav"
+        ></audio>
         {this.props.keyTrigger}
       </div>
     );
