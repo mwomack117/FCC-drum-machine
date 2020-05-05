@@ -15,7 +15,7 @@ const activeStyle = {
   width: 90,
   height: 90,
   fontSize: 20,
-  backgroundColor: "orange",
+  backgroundColor: "sandyBrown",
   margin: 5,
   display: "flex",
   justifyContent: "center",
